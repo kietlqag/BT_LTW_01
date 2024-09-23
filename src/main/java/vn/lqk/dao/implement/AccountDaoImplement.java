@@ -18,18 +18,18 @@ public class AccountDaoImplement extends DBConnectMySQL implements IAccountDao {
 	@Override
 	public List<AccountModel> findAll() {
 		String sql = "SELECT * FROM account";
-		
+
 		List<AccountModel> list = new ArrayList<>();
-		
+
 		try {
-			conn =super.getDatabaseConnection();
+			conn = super.getDatabaseConnection();
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
-			
+
 			while (rs.next()) {
-					list.add(new AccountModel(rs.getString("username"), rs.getString("password"), rs.getString("tennguoidung")));
+				list.add(new AccountModel(rs.getString("username"), rs.getString("password"), rs.getString("fullname"), rs.getInt("roleid")));
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -44,18 +44,19 @@ public class AccountDaoImplement extends DBConnectMySQL implements IAccountDao {
 			conn = super.getDatabaseConnection();
 
 			ps = conn.prepareStatement(sql);
-			
+
 			ps.setString(1, username);
-			
+
 			ResultSet rs = ps.executeQuery();
-			
+
 			while (rs.next()) {
 				account = new AccountModel();
-	            account.setUsername(rs.getString("username"));
-	            account.setPassword(rs.getString("password"));
-	            account.setFullname(rs.getString("fullname"));
-	        }
-			
+				account.setUsername(rs.getString("username"));
+				account.setPassword(rs.getString("password"));
+				account.setFullname(rs.getString("fullname"));
+				account.setRoleid(rs.getInt("roleid"));
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

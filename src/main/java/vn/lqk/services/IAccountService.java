@@ -6,6 +6,6 @@ public interface IAccountService {
 
 	AccountModel login(String username, String password);
 	
-	AccountModel FindByUsername(String username);
+	AccountModel findByUsername(String username);
 	
 }

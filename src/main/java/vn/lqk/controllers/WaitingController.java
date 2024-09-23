@@ -6,8 +6,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import vn.lqk.models.AccountModel;
 
-@WebServlet(urlPatterns = {"/waiting"})
+@WebServlet(urlPatterns = { "/waiting" })
 public class WaitingController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -15,7 +17,21 @@ public class WaitingController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		HttpSession session = req.getSession();
+		if (session != null && session.getAttribute("account") != null) {
+			AccountModel u = (AccountModel) session.getAttribute("account");
+			req.setAttribute("username", u.getUsername());
+			if (u.getRoleid() == 1) {
+				resp.sendRedirect(req.getContextPath() + "/views/manager/home.jsp");
+			} else if (u.getRoleid() == 2) {
+				resp.sendRedirect(req.getContextPath() + "/views/shipper/home.jsp");
+			} else {
+				resp.sendRedirect(req.getContextPath() + "/views/home");
+			}
+		} else {
+			resp.sendRedirect(req.getContextPath() + "/login");
+		}
 
 	}
-	
+
 }

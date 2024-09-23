@@ -11,4 +11,5 @@ public interface IAccountDao {
 	AccountModel findByUsername(String username);
 	
 	void insert(AccountModel account);
+	
 }

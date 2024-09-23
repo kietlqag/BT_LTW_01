@@ -73,4 +73,5 @@ public class LoginController extends HttpServlet {
 		cookie.setMaxAge(30 * 60);
 		resp.addCookie(cookie);
 	}
+	
 }

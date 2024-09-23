@@ -11,7 +11,7 @@ public class AccountServiceImplement implements IAccountService {
 
 	@Override
 	public AccountModel login(String username, String password) {
-		AccountModel account = this.FindByUsername(username);
+		AccountModel account = this.findByUsername(username);
 		if (account != null && password.equals(account.getPassword())) {
 			return account;
 		} else {
@@ -20,7 +20,7 @@ public class AccountServiceImplement implements IAccountService {
 	}
 
 	@Override
-	public AccountModel FindByUsername(String username) {
+	public AccountModel findByUsername(String username) {
 		return accountDao.findByUsername(username);
 	}
 

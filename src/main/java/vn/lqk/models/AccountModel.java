@@ -8,16 +8,18 @@ public class AccountModel implements Serializable {
 	private String username;
 	private String password;
 	private String fullname;
-	
+	private int roleid;
+
 	public AccountModel() {
 		super();
 	}
-	
-	public AccountModel(String username, String password, String fullname) {
+
+	public AccountModel(String username, String password, String fullname, int roleid) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.fullname = fullname;
+		this.roleid = roleid;
 	}
 
 	public String getUsername() {
@@ -43,9 +45,13 @@ public class AccountModel implements Serializable {
 	public void setFullname(String fullname) {
 		this.fullname = fullname;
 	}
+	
 
-	@Override
-	public String toString() {
-		return "AccountModel [username=" + username + ", password=" + password + ", fullname=" + fullname + "]";
+	public int getRoleid() {
+		return roleid;
+	}
+
+	public void setRoleid(int roleid) {
+		this.roleid = roleid;
 	}
 }
