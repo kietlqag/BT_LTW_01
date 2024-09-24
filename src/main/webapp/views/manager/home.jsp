@@ -8,6 +8,8 @@
 </head>
 <body>
 	<h1>Trang chủ của manager</h1>
-	<a href="logout">Logout</a>
+	<form action="${pageContext.request.contextPath}/logout" method="post">
+    <button type="submit">Logout</button>
+</form>
 </body>
 </html>
