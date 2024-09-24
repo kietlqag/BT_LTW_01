@@ -14,7 +14,7 @@ import vn.lqk.services.IAccountService;
 import vn.lqk.services.implement.AccountServiceImplement;
 import vn.lqk.utils.Constant;
 
-@WebServlet(urlPatterns = { "/login" })
+@WebServlet(urlPatterns = {"/login" })
 public class LoginController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -23,7 +23,7 @@ public class LoginController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher dispatcher = req.getRequestDispatcher("login.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("views/login.jsp");
 		dispatcher.forward(req, resp);
 	}
 
@@ -44,13 +44,6 @@ public class LoginController extends HttpServlet {
 		
 		String alertMsg = "";
 		
-//		if (username.isEmpty() || password.isEmpty()) {
-//			alertMsg = "Tài khoản hoặc mật khẩu không được rỗng";
-//			req.setAttribute("alert", alertMsg);
-//			req.getRequestDispatcher("/views/login.jsp").forward(req, resp);
-//			return;
-//		}
-
 		AccountModel account = service.login(username, password);
 
 		if (account != null) {
@@ -63,7 +56,7 @@ public class LoginController extends HttpServlet {
 		} else {
 			alertMsg = "Tài khoản hoặc mật khẩu không đúng";
 			req.setAttribute("alert", alertMsg);
-			RequestDispatcher dispatcher = req.getRequestDispatcher("login.jsp");
+			RequestDispatcher dispatcher = req.getRequestDispatcher("views/login.jsp");
 			dispatcher.forward(req, resp);
 		}
 	}

@@ -13,4 +13,6 @@ public interface IAccountDao {
 	void insert(AccountModel account);
 	
 	boolean checkExistUsername(String username);
+	
+	void update(String username, String password);
 }

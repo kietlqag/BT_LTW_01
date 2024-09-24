@@ -8,9 +8,9 @@ public interface IAccountService {
 	
 	AccountModel findByUsername(String username);
 	
-	void insert(AccountModel account);
-	
-	boolean register(String password, String username, String fullname);
+	boolean register(String username, String fullname, String password);
 	
 	boolean checkExistUsername(String username);
+	
+	boolean resetpass(String username, String password);
 }

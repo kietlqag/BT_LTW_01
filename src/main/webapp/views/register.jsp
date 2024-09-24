@@ -12,15 +12,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="/BT_LTW_01/register" method="post">
+	<form action="register" method="post">
 		<c:if test="${alert !=null}">
 			<h3 class="alert alert-danger">${alert}</h3>
 		</c:if>
 		<div class="container">
 			<h1>Register</h1>
-			<p>Please fill in this form to create an account.</p>
 			<hr>
-
 			<label for="username"><b>Username</b></label> <input type="text"
 				placeholder="Enter Username" name="username" id="username" required>
 

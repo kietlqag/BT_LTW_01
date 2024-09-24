@@ -1,5 +1,6 @@
 package vn.lqk.controllers;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
@@ -12,12 +13,11 @@ import vn.lqk.services.*;
 import vn.lqk.services.implement.AccountServiceImplement;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = {"/register"})
+@WebServlet(urlPatterns = { "/register" })
 public class RegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
 		HttpSession session = req.getSession(false);
 		if (session != null && session.getAttribute("username") != null) {
 			resp.sendRedirect(req.getContextPath() + "/manager");
@@ -34,35 +34,40 @@ public class RegisterController extends HttpServlet {
 				}
 			}
 		}
-		req.getRequestDispatcher(Constant.REGISTER).forward(req, resp);
+		RequestDispatcher dispatcher = req.getRequestDispatcher(Constant.REGISTER);
+		dispatcher.forward(req, resp);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setCharacterEncoding("UTF-8");
 		req.setCharacterEncoding("UTF-8");
+
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
 		String fullname = req.getParameter("fullname");
-		
+
 		IAccountService service = new AccountServiceImplement();
 		String alertMsg = "";
-		
+
 		if (service.checkExistUsername(username)) {
 			alertMsg = "Tài khoản đã tồn tại!";
 			req.setAttribute("alert", alertMsg);
-			req.getRequestDispatcher(Constant.REGISTER).forward(req, resp);
+			RequestDispatcher dispatcher = req.getRequestDispatcher(Constant.REGISTER);
+			dispatcher.forward(req, resp);
 			return;
 		}
-		
+
 		boolean isSuccess = service.register(username, password, fullname);
+		
 		if (isSuccess) {
-		req.setAttribute("alert", alertMsg);
-		resp.sendRedirect(req.getContextPath() + "/login");
+			req.setAttribute("alert", alertMsg);
+			resp.sendRedirect("./login");
 		} else {
-		alertMsg = "System error!";
-		req.setAttribute("alert", alertMsg);
-		req.getRequestDispatcher(Constant.REGISTER).forward(req, resp);
+			alertMsg = "Đăng ký không thành công!";
+			req.setAttribute("alert", alertMsg);
+			RequestDispatcher dispatcher = req.getRequestDispatcher(Constant.REGISTER);
+			dispatcher.forward(req, resp);
 		}
 	}
 }

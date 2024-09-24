@@ -25,22 +25,27 @@ public class AccountServiceImplement implements IAccountService {
 	}
 
 	@Override
-	public void insert(AccountModel account) {
-		accountDao.insert(account);
-		
-	}
-
-	@Override
-	public boolean register(String password, String username, String fullname) {
+	public boolean register(String username, String password, String fullname) {
 		if (accountDao.checkExistUsername(username)) {
 			return false;
-			}
-			accountDao.insert(new AccountModel(username, fullname, password, 2));
-			return true;
+		} else {
+		accountDao.insert(new AccountModel(username, password, fullname, 2));
+		return true;
+		}
 	}
 
 	@Override
 	public boolean checkExistUsername(String username) {
 		return accountDao.checkExistUsername(username);
+	}
+
+	@Override
+	public boolean resetpass(String username, String password) {
+		if (!accountDao.checkExistUsername(username)) {
+			return false;
+		} else {
+		accountDao.update(username, password);
+		return true;
+		}
 	}
 }

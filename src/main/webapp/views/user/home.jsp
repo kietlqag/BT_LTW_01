@@ -7,9 +7,9 @@
 <title>Trang Chủ</title>
 </head>
 <body>
-	Trang chủ của user
-	<div class="container">
-		<button type="submit">Logout</button>
-	</div>
+	<h1>Trang chủ của user</h1>
+	<form action="${pageContext.request.contextPath}/logout" method="post">
+    <button type="submit">Logout</button>
+</form>
 </body>
 </html>

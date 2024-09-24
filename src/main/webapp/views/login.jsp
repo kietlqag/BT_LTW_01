@@ -9,11 +9,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Đăng Nhập</title>
+<style>
+.container {
+	margin: 20px;
+}
+
+.alert {
+	color: red;
+}
+</style>
 </head>
 <body>
-	<form action="/BT_LTW_01/login" method="post">
-		<c:if test="${alert !=null}">
-			<h3 class="alert alert-danger">${alert}</h3>
+	<form action="login" method="post">
+		<c:if test="${alert != null}">
+			<h3 class="alert">${alert}</h3>
 		</c:if>
 		<div class="container">
 			<label for="uname"><b>Username</b></label> <input type="text"
@@ -22,11 +31,17 @@
 				placeholder="Enter Password" name="psw" required>
 
 			<button type="submit">Login</button>
+			<label> <input type="checkbox" checked="checked"
+				name="remember"> Remember me
+			</label>
 		</div>
 
-		<div class="container" style="background-color: #f1f1f1">
-			<button type="button" class="cancelbtn">Cancel</button>
-			<span class="psw">Forgot <a href="#">password?</a></span>
+		<div class="container">
+			<a href="reset-password">Forgot password?</a>
+		</div>
+
+		<div class="container">
+			<a href="register">Sign Up</a>
 		</div>
 	</form>
 </body>

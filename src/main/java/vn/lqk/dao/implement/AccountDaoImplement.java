@@ -66,7 +66,7 @@ public class AccountDaoImplement extends DBConnectMySQL implements IAccountDao {
 
 	@Override
 	public void insert(AccountModel account) {
-		String sql = "INSERT INTO account(username, password, tennguoidung) VALUES(?, ?, ?)";
+		String sql = "INSERT INTO account(username, password, fullname, roleid) VALUES(?, ?, ?, ?)";
 
 		try {
 			conn = super.getDatabaseConnection();
@@ -76,6 +76,7 @@ public class AccountDaoImplement extends DBConnectMySQL implements IAccountDao {
 			ps.setString(1, account.getUsername());
 			ps.setString(2, account.getPassword());
 			ps.setString(3, account.getFullname());
+			ps.setInt(4, account.getRoleid());
 
 			ps.executeUpdate();
 
@@ -87,7 +88,7 @@ public class AccountDaoImplement extends DBConnectMySQL implements IAccountDao {
 	@Override
 	public boolean checkExistUsername(String username) {
 		boolean duplicate = false;
-		String query = "SELECT * FROM [account] where username = ?";
+		String query = "SELECT 1 FROM account where username = ?";
 		try {
 			conn = super.getDatabaseConnection();
 			ps = conn.prepareStatement(query);
@@ -96,11 +97,28 @@ public class AccountDaoImplement extends DBConnectMySQL implements IAccountDao {
 			if (rs.next()) {
 				duplicate = true;
 			}
-			ps.close();
-			conn.close();
 		} catch (Exception ex) {
 		}
 		return duplicate;
 	}
 
+	@Override
+	public void update(String username, String password) {
+		String sql = "UPDATE account SET password = ? WHERE username = ?";;
+
+		try {
+			conn = super.getDatabaseConnection();
+
+			ps = conn.prepareStatement(sql);
+
+			ps.setString(1, password); 
+	        ps.setString(2, username); 
+			
+			ps.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 }
