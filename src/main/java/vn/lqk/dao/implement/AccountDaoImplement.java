@@ -27,7 +27,8 @@ public class AccountDaoImplement extends DBConnectMySQL implements IAccountDao {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				list.add(new AccountModel(rs.getString("username"), rs.getString("password"), rs.getString("fullname"), rs.getInt("roleid")));
+				list.add(new AccountModel(rs.getString("username"), rs.getString("password"), rs.getString("fullname"),
+						rs.getInt("roleid")));
 			}
 
 		} catch (Exception e) {
@@ -81,6 +82,25 @@ public class AccountDaoImplement extends DBConnectMySQL implements IAccountDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public boolean checkExistUsername(String username) {
+		boolean duplicate = false;
+		String query = "SELECT * FROM [account] where username = ?";
+		try {
+			conn = super.getDatabaseConnection();
+			ps = conn.prepareStatement(query);
+			ps.setString(1, username);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				duplicate = true;
+			}
+			ps.close();
+			conn.close();
+		} catch (Exception ex) {
+		}
+		return duplicate;
 	}
 
 }
