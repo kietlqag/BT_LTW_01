@@ -10,14 +10,14 @@ import jakarta.servlet.http.HttpSession;
 import vn.lqk.utils.Constant;
 import vn.lqk.services.*;
 import vn.lqk.services.implement.AccountServiceImplement;
-
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/register")
+@WebServlet(urlPatterns = {"/register"})
 public class RegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		HttpSession session = req.getSession(false);
 		if (session != null && session.getAttribute("username") != null) {
 			resp.sendRedirect(req.getContextPath() + "/manager");
@@ -37,7 +37,6 @@ public class RegisterController extends HttpServlet {
 		req.getRequestDispatcher(Constant.REGISTER).forward(req, resp);
 	}
 
-	@SuppressWarnings("static-access")
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setCharacterEncoding("UTF-8");
@@ -45,6 +44,7 @@ public class RegisterController extends HttpServlet {
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
 		String fullname = req.getParameter("fullname");
+		
 		IAccountService service = new AccountServiceImplement();
 		String alertMsg = "";
 		

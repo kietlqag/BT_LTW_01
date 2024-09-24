@@ -24,8 +24,11 @@
 			<label for="username"><b>Username</b></label> <input type="text"
 				placeholder="Enter Username" name="username" id="username" required>
 
-			<label for="psw"><b>Password</b></label> <input type="password"
+			<label for="password"><b>Password</b></label> <input type="password"
 				placeholder="Enter Password" name="password" id="password" required>
+				
+			<label for="fullname"><b>Fullname</b></label> <input type="text"
+				placeholder="Enter Fullname" name="fullname" id="fullname" required>
 			<hr>
 
 			<button type="submit" class="registerbtn">Register</button>

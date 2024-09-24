@@ -17,14 +17,4 @@
     <servlet-name>LogoutController</servlet-name>
     <url-pattern>/logout</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>RegisterController</display-name>
-    <servlet-name>RegisterController</servlet-name>
-    <servlet-class>vn.lqk.controllers.RegisterController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>RegisterController</servlet-name>
-    <url-pattern>/RegisterController</url-pattern>
-  </servlet-mapping>
 </web-app>
